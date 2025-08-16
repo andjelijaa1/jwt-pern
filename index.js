@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 
 import authRouter from "./routes/auth-routes.js";
 import userRouter from "./routes/user-routes.js";
+import { authenticateToken } from "./middleware/authorization.js";
 
 dotenv.config();
 
@@ -61,6 +62,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Routes
 app.use("/api/auth", authRouter);
+app.use(authenticateToken);
 app.use("/api/users", userRouter);
 
 // Start server
