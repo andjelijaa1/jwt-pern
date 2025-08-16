@@ -1,5 +1,0 @@
-### Get all users
-GET http://localhost:5000/api/users
-
-### Sign up
-POST http://localhost:5000/api/auth/signup
