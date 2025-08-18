@@ -13,6 +13,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/me", authenticateToken, async (req, res) => {
+  try {
+    res.json({ user: req.user });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.delete("/:name", async (req, res) => {
   const { name } = req.params;
 

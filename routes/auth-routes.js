@@ -5,7 +5,6 @@ import { jwtTokens } from "../utils/jwt-tokens.js";
 
 const router = express.Router();
 
-// sign up
 router.post("/signup", async (req, res) => {
   try {
     const { user_name, user_email, user_password } = req.body;
@@ -55,7 +54,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.delete("/logout", (req, res) => {
-  // Obriši refresh token cookie
   res.clearCookie("refresh_token", {
     ...(process.env.COOKIE_DOMAIN && { domain: process.env.COOKIE_DOMAIN }),
     httpOnly: true,
