@@ -35,6 +35,9 @@ router.post("/login", async (req, res) => {
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
       email,
     ]);
+    if (user.rows.length === 0) {
+      return res.status(401).json({ message: "Email not found!" });
+    }
     const user_password = user.rows[0].user_password;
     const correctPassword = await bcrypt.compare(password, user_password);
     if (!correctPassword)
@@ -47,6 +50,7 @@ router.post("/login", async (req, res) => {
       secure: true,
       sameSite: "none",
     });
+
     res.json(tokens);
   } catch (error) {
     res.status(500).json({ error: error.message });
